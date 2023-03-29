@@ -13,19 +13,6 @@ class App extends Component {
     filter: '',
   };
 
-  updateState = date => {
-    if (this.state.contacts.some(el => el.name === date.name)) {
-      alert(`${date.name} is already in contacts.`);
-    } else {
-      this.setState(prevState => ({
-        contacts: [
-          { name: date.name, number: date.number, id: nanoid() },
-          ...prevState.contacts,
-        ],
-      }));
-    }
-  };
-
   componentDidMount() {
     const lsContacts = load(KEY_CONTACTS);
     if (lsContacts) {
@@ -38,6 +25,19 @@ class App extends Component {
       save(KEY_CONTACTS, this.state.contacts);
     }
   }
+  
+  updateState = date => {
+    if (this.state.contacts.some(el => el.name === date.name)) {
+      alert(`${date.name} is already in contacts.`);
+    } else {
+      this.setState(prevState => ({
+        contacts: [
+          { name: date.name, number: date.number, id: nanoid() },
+          ...prevState.contacts,
+        ],
+      }));
+    }
+  };
 
   updateFilter = date => {
     this.setState({ filter: date });
@@ -52,7 +52,7 @@ class App extends Component {
   };
 
   deleteContact = id => {
-    this.setState(({contacts})=> ({
+    this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== id),
     }));
   };
