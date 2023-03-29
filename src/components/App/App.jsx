@@ -4,15 +4,12 @@ import { Container, TitleForm, TitleContacts } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactsList from '../ContactsList/ContactsList';
 import Filter from '../Filter/Filter';
+import { save, load } from '../Utils/Utils';
 
+const KEY_CONTACTS = 'contacts';
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -28,6 +25,19 @@ class App extends Component {
       }));
     }
   };
+
+  componentDidMount() {
+    const lsContacts = load(KEY_CONTACTS);
+    if (lsContacts) {
+      this.setState({ contacts: lsContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      save(KEY_CONTACTS, this.state.contacts);
+    }
+  }
 
   updateFilter = date => {
     this.setState({ filter: date });
@@ -53,8 +63,14 @@ class App extends Component {
       <Container>
         <TitleForm>Phonebook</TitleForm>
         <ContactForm updateState={this.updateState} />
-        <TitleContacts>Contacts</TitleContacts>
-        <Filter state={filter} updateFilter={this.updateFilter} />
+
+        {this.state.contacts.length !== 0 && (
+          <>
+            <TitleContacts>Contacts</TitleContacts>
+            <Filter state={filter} updateFilter={this.updateFilter} />
+          </>
+        )}
+
         {this.state.filter === '' ? (
           <ContactsList state={contacts} deleteContact={this.deleteContact} />
         ) : (
