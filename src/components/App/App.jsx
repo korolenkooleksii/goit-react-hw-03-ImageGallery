@@ -46,14 +46,14 @@ class App extends Component {
   filterByName = () => {
     const { contacts, filter } = this.state;
     const arr = contacts.filter(el =>
-      el.name.toLowerCase().includes(filter.trim().toLowerCase())
+      el.name.toLowerCase().includes(filter.toLowerCase())
     );
     return arr;
   };
 
   deleteContact = id => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    this.setState(({contacts})=> ({
+      contacts: contacts.filter(contact => contact.id !== id),
     }));
   };
 
@@ -64,14 +64,14 @@ class App extends Component {
         <TitleForm>Phonebook</TitleForm>
         <ContactForm updateState={this.updateState} />
 
-        {this.state.contacts.length !== 0 && (
+        {contacts.length !== 0 && (
           <>
             <TitleContacts>Contacts</TitleContacts>
             <Filter state={filter} updateFilter={this.updateFilter} />
           </>
         )}
 
-        {this.state.filter === '' ? (
+        {filter === '' ? (
           <ContactsList state={contacts} deleteContact={this.deleteContact} />
         ) : (
           <ContactsList
