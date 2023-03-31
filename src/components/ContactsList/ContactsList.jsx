@@ -5,6 +5,7 @@ import {
   ButtonDelete,
 } from './ContactsList.styled';
 import { TbPoint } from 'react-icons/tb';
+import { MdDeleteForever } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
 const ContactsList = ({ state, deleteContact }) => {
@@ -20,7 +21,7 @@ const ContactsList = ({ state, deleteContact }) => {
               deleteContact(id);
             }}
           >
-            Delete
+            <MdDeleteForever/>
           </ButtonDelete>
         </ItemContacts>
       ))}

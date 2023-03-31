@@ -17,7 +17,7 @@ export const ItemContacts = styled.li`
 `;
 
 export const ButtonDelete = styled.button`
-  min-width: 60px;
+  /* min-width: 60px;
   padding: 2px;
   margin-left: auto;
   border: 1px solid ${p => p.theme.colors.dark};
@@ -38,6 +38,30 @@ export const ButtonDelete = styled.button`
   :hover {
     border: 1px solid ${p => p.theme.colors.white};
     box-shadow: ${p => p.theme.colors.shadowAccent};
-    color: ${p => p.theme.colors.white};
+    color: ${p => p.theme.colors.white}; */
+
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+
+  :hover {
+    border: 1px solid #3f72e1;
+  }
+
+  :hover svg {
+    color: #3f72e1;
+  }
+
+  svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: ${p => p.theme.colors.dark};
   }
 `;

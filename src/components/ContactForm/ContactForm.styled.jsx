@@ -60,5 +60,6 @@ export const ButtonForm = styled.button`
     border: 1px solid ${p => p.theme.colors.white};
     box-shadow: ${p => p.theme.colors.shadowAccent};
     color: ${p => p.theme.colors.white};
+    
   }
 `;
